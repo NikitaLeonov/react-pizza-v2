@@ -1,24 +1,23 @@
+import React from 'react'
+
 import Header from './components/Header'
 import Sort from './components/Sort'
 import PizzaBlock from './components/PizzaBlock'
+import Categories from './components/Categories'
+
+import pizzas from './assets/pizzas.json'
+
 import './sass/app.sass'
 
-const Categories = () => {
-  return (
-    <div className='categories'>
-      <ul>
-        <li className='active'>Все</li>
-        <li>Мясные</li>
-        <li>Вегетарианская</li>
-        <li>Гриль</li>
-        <li>Острые</li>
-        <li>Закрытые</li>
-      </ul>
-    </div>
-  )
-}
-
 function App() {
+  const [pizzas, SetPizzas] = React.useState([])
+
+  const url = 'https://62d93df49eedb6996356fe1c.mockapi.io/'
+
+  fetch(`${url}/items`, { method: 'GET' })
+    .then(res => res.json())
+    .then(data => console.log(data))
+
   return (
     <div className='App'>
       <div className='wrapper'>
@@ -31,7 +30,9 @@ function App() {
             </div>
             <h2 className='content__title'>Все пиццы</h2>
             <div className='content__items'>
-              <PizzaBlock title='Мексиканская' price={500} />
+              {pizzas.map(pizza => (
+                <PizzaBlock key={pizza.id} {...pizza} />
+              ))}
             </div>
           </div>
         </div>

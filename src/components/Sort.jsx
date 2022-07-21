@@ -1,8 +1,23 @@
+import React from 'react'
+
 const Sort = () => {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const [selected, setSelected] = React.useState(0)
+  const sortTypes = ['популярности', 'цене', 'алфавиту']
+
+  const clickOnSortHandler = index => {
+    setSelected(index)
+    setIsOpen(false)
+  }
   return (
     <div className='sort'>
       <div className='sort__label'>
         <svg
+          style={
+            isOpen
+              ? { transformOrigin: 'center center', transform: 'rotate(180deg)' }
+              : {}
+          }
           width='10'
           height='6'
           viewBox='0 0 10 6'
@@ -15,15 +30,19 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={() => setIsOpen(!isOpen)}>{sortTypes[selected]}</span>
       </div>
-      <div className='sort__popup'>
-        <ul>
-          <li className='active'>популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {isOpen && (
+        <div className='sort__popup'>
+          <ul>
+            {sortTypes.map((type, index) => (
+              <li key={index} onClick={() => clickOnSortHandler(index)}>
+                {type}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
