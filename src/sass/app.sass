@@ -4,30 +4,61 @@
 
 body 
   background-color: $background
-
+  overflow-y: scroll
 .wrapper 
   width: calc(100vw - 100px)
   height: 100%
   background-color: #fff
-  margin: 50px auto
+  margin: 40px auto
   border-radius: 10px
-  max-width: 1400px
 
 .content 
+
+  // outline: 1px solid 
+  
   padding: 40px 0
   &__title 
-    margin: 35px 0
-  &__items 
+    font-size: 38px
+    font-weight: 800
+    margin-top: 60px
+    margin-bottom: 40px
+  &__items     
+
+    // outline: 1px solid black
+
     display: flex
-    flex-wrap: wrap
     justify-content: space-between
+    flex-wrap: wrap
+    @media (max-width: 1040px)
+      justify-content: space-around
+
   &__top 
     display: flex
     align-items: center
     justify-content: space-between
+    @media (max-width: 1344px)
+      .categories
+        width: 100%
+        ul
+          width: 785px
+      .sort
+        padding-left: 20px
+        b          
+          display: none    
+    @media (max-width: 760px)
+      .categories
+        ul
+          li
+            padding: 8px 20px
+
+    @media (max-width: 820px)
+      flex-direction: column-reverse
+      .categories
+        margin-top: 30px
 
 .container 
-  width: $container-width
+  width: $container-width  
+  scrollbar-color: red
   margin: 0 auto
   &--cart 
     max-width: 820px

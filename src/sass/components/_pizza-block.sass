@@ -1,48 +1,47 @@
 @import '../variables'
 
 .pizza-block 
+  // outline: 1px solid black
   width: 280px
+  display: flex
+  flex-direction: column
+  justify-content: space-between
   text-align: center
+  padding: 10px
   margin-bottom: 65px
-  &:not(:nth-of-type(4n)) 
-    margin-right: 35px
   &__image 
     width: 260px
+    height: 260px
   &__title 
     font-size: 20px
     font-weight: 900
-    letter-spacing: 1%
     margin-bottom: 20px
   &__selector 
-    display: flex
-    background-color: #f3f3f3
-    border-radius: 10px
-    flex-direction: column
     padding: 6px
+    margin-bottom: 20px
+    border-radius: 10px
+    background-color: #f3f3f3
     ul 
       display: flex
-      flex: 1
       &:first-of-type 
         margin-bottom: 6px
       li 
-        padding: 8px
         flex: 1
-        cursor: pointer
-        font-weight: 600
+        padding: 8px
         font-size: 14px
+        font-weight: 600
+        cursor: pointer
         @include noselect()
         &.active
-          background: #ffffff
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04)
           border-radius: 5px
+          background: #ffffff
           cursor: auto
   &__bottom 
     display: flex
     align-items: center
     justify-content: space-between
-    margin-top: 20px
   &__price 
-    font-weight: bold
     font-size: 22px
     line-height: 27px
-    letter-spacing: 0.015em
+    font-weight: bold
