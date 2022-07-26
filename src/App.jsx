@@ -1,9 +1,11 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+
 import Header from './components/Header'
-import Home from './pages/Home'
 import Cart from './pages/Cart'
+import Home from './pages/Home'
 import Page404 from './pages/Page404'
+
 import './sass/app.sass'
 
 export const SearchContext = React.createContext()

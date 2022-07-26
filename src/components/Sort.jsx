@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Sort = ({ sortValue, onChangeSort }) => {
+import { useSelector } from 'react-redux'
+
+const Sort = ({ onChangeSort }) => {
+  const sort = useSelector(state => state.filter.sort)
+
   const [isOpen, setIsOpen] = React.useState(false)
   const [order, setOrder] = React.useState(false)
 
@@ -24,11 +28,7 @@ const Sort = ({ sortValue, onChangeSort }) => {
         <div>
           <svg
             onClick={() => setOrder(prev => !prev)}
-            style={
-              order
-                ? { transformOrigin: 'center center', transform: 'rotate(180deg)' }
-                : {}
-            }
+            style={order ? { transformOrigin: 'center center', transform: 'rotate(180deg)' } : {}}
             width='10'
             height='6'
             viewBox='0 0 10 6'
@@ -42,7 +42,7 @@ const Sort = ({ sortValue, onChangeSort }) => {
           </svg>
           <b>Сортировка&nbsp;по:</b>
         </div>
-        <span onClick={() => setIsOpen(!isOpen)}>{sortValue.name}</span>
+        <span onClick={() => setIsOpen(!isOpen)}>{sort.name}</span>
       </div>
       {isOpen && (
         <div className='sort__popup'>
@@ -50,7 +50,7 @@ const Sort = ({ sortValue, onChangeSort }) => {
             {sortTypes.map((obj, index) => (
               <li
                 key={index}
-                className={sortValue.sortProperty === obj.sortProperty ? 'active' : ''}
+                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}
                 onClick={() => clickOnSortHandler(obj)}
               >
                 {obj.name}

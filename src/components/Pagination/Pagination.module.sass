@@ -1,0 +1,31 @@
+.root
+    text-align: center
+    li
+        display: inline-flex     
+        &:first-of-type
+                margin-right: 20px                
+        &:last-of-type
+                margin-left: 20px
+        a
+            background-color: darken(#f9f9f9, 2%)                      
+            width: 45px
+            height: 45px
+            padding: 10px
+            margin-right: 10px         
+            border-radius: 30px
+            color: #282828                             
+            text-align: center
+            font-weight: bold
+            cursor: pointer
+            transition: background-color 0.2s ease-in-out
+            &:hover
+                background-color: darken(#f9f9f9, 5%)            
+            
+    \:global
+        .selected
+            a                
+                background-color: #282828 
+                color: #fff
+                &:hover
+                    background-color: #282828
+                
