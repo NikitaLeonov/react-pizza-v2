@@ -5,13 +5,7 @@ const Cart = () => {
     <div className='cart'>
       <div className='cart__top'>
         <h2 className='content__title'>
-          <svg
-            width='18'
-            height='18'
-            viewBox='0 0 18 18'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
+          <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <path
               d='M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z'
               stroke='white'
@@ -37,13 +31,7 @@ const Cart = () => {
           Корзина
         </h2>
         <div className='cart__clear'>
-          <svg
-            width='20'
-            height='20'
-            viewBox='0 0 20 20'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
+          <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <path
               d='M2.5 5H4.16667H17.5'
               stroke='#B6B6B6'
@@ -76,7 +64,7 @@ const Cart = () => {
           <span>Очистить корзину</span>
         </div>
       </div>
-      <div className='content__items'>
+      <div className='content__cart-items'>
         <div className='cart__item'>
           <div className='cart__item-img'>
             <img
@@ -91,13 +79,7 @@ const Cart = () => {
           </div>
           <div className='cart__item-count'>
             <div className='button button--outline button--circle cart__item-count-minus'>
-              <svg
-                width='10'
-                height='10'
-                viewBox='0 0 10 10'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
+              <svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   d='M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z'
                   fill='#EB5A1E'
@@ -110,13 +92,7 @@ const Cart = () => {
             </div>
             <b>2</b>
             <div className='button button--outline button--circle cart__item-count-plus'>
-              <svg
-                width='10'
-                height='10'
-                viewBox='0 0 10 10'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
+              <svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   d='M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z'
                   fill='#EB5A1E'
@@ -133,13 +109,7 @@ const Cart = () => {
           </div>
           <div className='cart__item-remove'>
             <div className='button button--outline button--circle'>
-              <svg
-                width='10'
-                height='10'
-                viewBox='0 0 10 10'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
+              <svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   d='M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z'
                   fill='#EB5A1E'
@@ -164,13 +134,7 @@ const Cart = () => {
         </div>
         <div className='cart__bottom-buttons'>
           <Link to='/' className='button button--outline button--add go-back-btn'>
-            <svg
-              width='8'
-              height='14'
-              viewBox='0 0 8 14'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
+            <svg width='8' height='14' viewBox='0 0 8 14' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 d='M7 13L1 6.93015L6.86175 1'
                 stroke='#D3D3D3'

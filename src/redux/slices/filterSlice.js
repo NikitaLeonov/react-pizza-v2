@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
   categoryId: 0,
@@ -22,8 +23,13 @@ const filterSlice = createSlice({
     setPage(state, action) {
       state.page = action.payload.page
     },
+    setFilters(state, action) {
+      state.sort = action.payload.sort
+      state.page = Number(action.payload.page)
+      state.categoryId = Number(action.payload.categoryId)
+    },
   },
 })
 
-export const { setCategoryId, setSortType, setPage } = filterSlice.actions
+export const { setCategoryId, setSortType, setPage, setFilters } = filterSlice.actions
 export default filterSlice.reducer

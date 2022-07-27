@@ -83,6 +83,7 @@ body
         stroke-width: 1.9
   &__clear 
     display: flex
+    margin-top: 20px
     align-items: center
     cursor: pointer
     @include noselect()
@@ -105,12 +106,16 @@ body
     width: 100%
     border-top: 1px solid $gray-line
     padding-top: 30px
-    margin-top: 30px
-    &-img 
+    margin-top: 30px        
+    // @media (max-width: 780px)          
+      // flex-direction: column
+    &-img       
       display: flex
       align-items: center
       margin-right: 15px
       width: 10%
+      @media (max-width: 1160px)          
+        display: none      
       img 
         width: 80px
         height: 80px
@@ -138,6 +143,7 @@ body
             display: none                  
       b 
         font-size: 22px
+        padding: 0 16px
     &-price 
       display: flex
       align-items: center

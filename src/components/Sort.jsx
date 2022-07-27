@@ -2,28 +2,38 @@ import React from 'react'
 
 import { useSelector } from 'react-redux'
 
+export const sortList = [
+  { name: 'популярности (DESK)', sortProperty: 'rating' },
+  { name: 'популярности (ASC)', sortProperty: '-rating' },
+  { name: 'цене (DESK)', sortProperty: 'price' },
+  { name: 'цене (ASC)', sortProperty: '-price' },
+  { name: 'алфавиту (DESK)', sortProperty: 'name' },
+  { name: 'алфавиту (ASC)', sortProperty: '-name' },
+]
+
 const Sort = ({ onChangeSort }) => {
   const sort = useSelector(state => state.filter.sort)
+  const sortRef = React.useRef()
 
   const [isOpen, setIsOpen] = React.useState(false)
   const [order, setOrder] = React.useState(false)
-
-  const sortTypes = [
-    { name: 'популярности (DESK)', sortProperty: 'rating' },
-    { name: 'популярности (ASC)', sortProperty: '-rating' },
-    { name: 'цене (DESK)', sortProperty: 'price' },
-    { name: 'цене (ASC)', sortProperty: '-price' },
-    { name: 'алфавиту (DESK)', sortProperty: 'name' },
-    { name: 'алфавиту (ASC)', sortProperty: '-name' },
-  ]
 
   const clickOnSortHandler = obj => {
     onChangeSort(obj)
     setIsOpen(false)
   }
 
+  React.useEffect(() => {
+    const handleClickOutside = event => {
+      if (!event.path.includes(sortRef.current)) setIsOpen(false)
+    }
+    document.body.addEventListener('click', handleClickOutside)
+
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
+
   return (
-    <div className='sort'>
+    <div ref={sortRef} className='sort'>
       <div className='sort__label'>
         <div>
           <svg
@@ -47,7 +57,7 @@ const Sort = ({ onChangeSort }) => {
       {isOpen && (
         <div className='sort__popup'>
           <ul>
-            {sortTypes.map((obj, index) => (
+            {sortList.map((obj, index) => (
               <li
                 key={index}
                 className={sort.sortProperty === obj.sortProperty ? 'active' : ''}
