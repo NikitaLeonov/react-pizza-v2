@@ -19,14 +19,12 @@ function App() {
         <SearchContext.Provider value={{ searchValue, setSearchValue }}>
           <Header />
           <div className='content'>
-            <div className='container'>
-              <Routes>
-                Cart
-                <Route path='/' element={<Home />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='*' element={<Page404 />} />
-              </Routes>
-            </div>
+            <Routes>
+              Cart
+              <Route path='/' element={<Home />} />
+              <Route path='/cart' element={<Cart />} />
+              <Route path='*' element={<Page404 />} />
+            </Routes>
           </div>
         </SearchContext.Provider>
       </div>

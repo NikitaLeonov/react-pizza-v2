@@ -1,19 +1,21 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { SearchContext } from '../App'
+import { SearchContext } from '../../App'
 
 import axios from 'axios'
 import qs from 'qs'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setCategoryId, setSortType, setPage, setFilters } from '../redux/slices/filterSlice'
+import { setCategoryId, setSortType, setPage, setFilters } from '../../redux/slices/filterSlice'
 
-import Categories from '../components/Categories'
-import Sort from '../components/Sort'
-import PizzaBlock from '../components/PizzaBlock'
-import Skeleton from '../components/Skeleton'
-import Pagination from '../components/Pagination'
-import { sortList } from '../components/Sort'
+import Categories from '../../components/Categories'
+import Sort from '../../components/Sort'
+import PizzaBlock from '../../components/PizzaBlock'
+import Skeleton from '../../components/PizzaBlock/Skeleton'
+import Pagination from '../../components/Pagination'
+import { sortList } from '../../components/Sort'
+
+import styles from './Home.module.sass'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -85,12 +87,12 @@ const Home = () => {
 
   return (
     <>
-      <div className='content__top'>
+      <div className={styles.top}>
         <Categories categoryId={categoryId} onChangeCategory={id => dispatch(setCategoryId({ id }))} />
         <Sort onChangeSort={obj => dispatch(setSortType({ obj }))} />
       </div>
-      <h2 className='content__title'>Все пиццы</h2>
-      <div className='content__items'>
+      <h2 className={styles.title}>Все пиццы</h2>
+      <div className={styles.items}>
         {isLoading && skeletons}
         {!isLoading && pizzas}
       </div>

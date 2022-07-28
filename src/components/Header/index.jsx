@@ -1,17 +1,23 @@
 import { Link } from 'react-router-dom'
-import logoSvg from '../assets/img/pizza-logo.svg'
-import Search from './Search'
+import { useSelector } from 'react-redux'
+
+import Search from '../Search'
+
+import styles from './Header.module.sass'
+import logoSvg from '../../assets/img/pizza-logo.svg'
 
 const Header = () => {
+  const { items, totalPrice } = useSelector(state => state.cart)
+
   return (
-    <div className='header'>
-      <div className='container'>
+    <div className={styles.header}>
+      <div className={styles.container}>
         <Link to='/'>
-          <div className='header__logo'>
+          <div className={styles.logo}>
             <img width='38' src={logoSvg} alt='Pizza logo' />
             <div>
               <h1>React Pizza v2</h1>
-              <p>самая вкусная пицца во вселенной</p>
+              <p>самая вкусная пицца во&nbsp;вселенной</p>
             </div>
           </div>
         </Link>
@@ -19,15 +25,9 @@ const Header = () => {
         <Link to='/cart'>
           <div className='header__cart'>
             <div className='button button--cart'>
-              <span>520 ₽</span>
+              <span>{totalPrice} ₽</span>
               <div className='button__delimiter'></div>
-              <svg
-                width='18'
-                height='18'
-                viewBox='0 0 18 18'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
+              <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   d='M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z'
                   stroke='white'
@@ -50,7 +50,7 @@ const Header = () => {
                   strokeLinejoin='round'
                 />
               </svg>
-              <span>3</span>
+              <span>{items.reduce((acc, item) => (acc += item.count), 0)}</span>
             </div>
           </div>
         </Link>

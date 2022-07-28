@@ -2,6 +2,8 @@ import React from 'react'
 
 import { useSelector } from 'react-redux'
 
+import styles from './Sort.module.sass'
+
 export const sortList = [
   { name: 'популярности (DESK)', sortProperty: 'rating' },
   { name: 'популярности (ASC)', sortProperty: '-rating' },
@@ -33,8 +35,8 @@ const Sort = ({ onChangeSort }) => {
   }, [])
 
   return (
-    <div ref={sortRef} className='sort'>
-      <div className='sort__label'>
+    <div ref={sortRef} className={styles.sort}>
+      <div className={styles.label}>
         <div>
           <svg
             onClick={() => setOrder(prev => !prev)}
@@ -55,7 +57,7 @@ const Sort = ({ onChangeSort }) => {
         <span onClick={() => setIsOpen(!isOpen)}>{sort.name}</span>
       </div>
       {isOpen && (
-        <div className='sort__popup'>
+        <div className={styles.popup}>
           <ul>
             {sortList.map((obj, index) => (
               <li
