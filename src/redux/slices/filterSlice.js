@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 
 const initialState = {
+  searchValue: '',
   categoryId: 0,
   page: 1,
   sort: {
@@ -17,6 +17,9 @@ const filterSlice = createSlice({
     setCategoryId(state, action) {
       state.categoryId = action.payload.id
     },
+    setSearchValue(state, action) {
+      state.searchValue = action.payload
+    },
     setSortType(state, action) {
       state.sort = action.payload.obj
     },
@@ -31,5 +34,5 @@ const filterSlice = createSlice({
   },
 })
 
-export const { setCategoryId, setSortType, setPage, setFilters } = filterSlice.actions
+export const { setCategoryId, setSortType, setPage, setFilters, setSearchValue } = filterSlice.actions
 export default filterSlice.reducer

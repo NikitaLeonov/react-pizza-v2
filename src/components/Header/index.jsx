@@ -5,9 +5,10 @@ import Search from '../Search'
 
 import styles from './Header.module.sass'
 import logoSvg from '../../assets/img/pizza-logo.svg'
+import { cartSelector } from '../../redux/slices/cartSlice'
 
 const Header = () => {
-  const { items, totalPrice } = useSelector(state => state.cart)
+  const { items, totalPrice } = useSelector(cartSelector)
 
   return (
     <div className={styles.header}>

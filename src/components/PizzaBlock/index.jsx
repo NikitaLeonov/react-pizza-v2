@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../../redux/slices/cartSlice'
+import { addItem, cartItemByIdSelector } from '../../redux/slices/cartSlice'
 
 import styles from './PizzaBlock.module.sass'
 
@@ -12,7 +12,7 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
   const [activeSize, setActiveSize] = React.useState(0)
   const [activeType, setActiveType] = React.useState(0)
 
-  const cartItem = useSelector(state => state.cart.items.find(item => item.id === id))
+  const cartItem = useSelector(cartItemByIdSelector(id))
   const addedCount = cartItem ? cartItem.count : 0
 
   const onClickAdd = () => {
