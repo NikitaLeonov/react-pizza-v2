@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem, cartItemByIdSelector } from '../../redux/slices/cartSlice'
@@ -32,8 +33,10 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
     <div className={styles.BlockWrapper}>
       <div className={styles.Block}>
         <div className={styles.info}>
-          <img src={imageUrl} alt='Pizza' />
-          <h4>{name}</h4>
+          <Link to={`pizza/${id}`}>
+            <img src={imageUrl} alt='Pizza' />
+            <h4>{name}</h4>
+          </Link>
         </div>
         <div>
           <div className={styles.selector}>
@@ -50,7 +53,11 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
             </ul>
             <ul>
               {sizes.map((size, index) => (
-                <li key={index} className={activeSize === index ? 'active' : ''} onClick={() => setActiveSize(index)}>
+                <li
+                  key={index}
+                  className={activeSize === index ? styles.active : ''}
+                  onClick={() => setActiveSize(index)}
+                >
                   {size} см.
                 </li>
               ))}
