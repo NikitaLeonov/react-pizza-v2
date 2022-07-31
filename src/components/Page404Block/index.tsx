@@ -1,6 +1,6 @@
 import styles from './Page404Block.module.sass'
 
-const Page404Block = props => {
+const Page404Block: React.FC = () => {
   return (
     <div className={styles.root}>
       <h1>
@@ -8,9 +8,7 @@ const Page404Block = props => {
         <br />
         Ничего не найдено
       </h1>
-      <p className={styles.description}>
-        К сожалению, данная страница отсутсвует в нашем интернет-магазине
-      </p>
+      <p className={styles.description}>К сожалению, данная страница отсутсвует в нашем интернет-магазине</p>
     </div>
   )
 }

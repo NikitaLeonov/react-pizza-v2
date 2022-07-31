@@ -1,22 +1,37 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
-
 import { useSelector, useDispatch } from 'react-redux'
-import { addItem, removeItem, clearItems, cartSelector } from '../redux/slices/cartSlice'
+import { clearItems, cartSelector } from '../redux/slices/cartSlice'
 
 import CartItem from '../components/CartItem'
 import CartEmpty from '../components/CartEmpty'
 
-const Cart = () => {
+type CartProps = {
+  id: string
+  name: string
+  price: number
+  imageUrl: string
+  types: number[]
+  sizes: number[]
+}
+
+const Cart: React.FC = () => {
   const dispatch = useDispatch()
   const { items } = useSelector(cartSelector)
-  // console.log(items)
+
   return (
     <div className='cart'>
       {items.length > 0 && (
         <>
           <div className='cart__top'>
             <h2 className='content__title'>
-              <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <svg
+                width='18'
+                height='18'
+                viewBox='0 0 18 18'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
                 <path
                   d='M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z'
                   stroke='white'
@@ -42,7 +57,13 @@ const Cart = () => {
               Корзина
             </h2>
             <div onClick={() => dispatch(clearItems())} className='cart__clear'>
-              <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <svg
+                width='20'
+                height='20'
+                viewBox='0 0 20 20'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
                 <path
                   d='M2.5 5H4.16667H17.5'
                   stroke='#B6B6B6'
@@ -76,22 +97,36 @@ const Cart = () => {
             </div>
           </div>
           <div className='content__cart-items'>
-            {items.map(item => (
+            {items.map((item: CartProps) => (
               <CartItem key={item.id} item={item} />
             ))}
           </div>
           <div className='cart__bottom'>
             <div className='cart__bottom-details'>
               <span>
-                Всего пицц: <b>{items.reduce((acc, item) => (acc += item.count), 0)} шт.</b>
+                <span>Всего пицц: </span>
+                <b>{items.reduce((acc: number, item: CartProps) => (acc += item.count), 0)} шт.</b>
               </span>
               <span>
-                Сумма заказа: <b>{items.reduce((acc, item) => (acc += item.price * item.count), 0)} ₽</b>
+                Сумма заказа:
+                <b>
+                  {items.reduce(
+                    (acc: number, item: CartProps) => (acc += item.price * item.count),
+                    0
+                  )}
+                  ₽
+                </b>
               </span>
             </div>
             <div className='cart__bottom-buttons'>
               <Link to='/' className='button button--outline button--add go-back-btn'>
-                <svg width='8' height='14' viewBox='0 0 8 14' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <svg
+                  width='8'
+                  height='14'
+                  viewBox='0 0 8 14'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
                   <path
                     d='M7 13L1 6.93015L6.86175 1'
                     stroke='#D3D3D3'

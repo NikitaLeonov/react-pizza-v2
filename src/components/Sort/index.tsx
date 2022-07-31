@@ -1,33 +1,36 @@
 import React from 'react'
-
 import { useSelector } from 'react-redux'
+import { ISortInfo, SortPropertyEnum } from '../../redux/slices/filterSlice'
 
 import styles from './Sort.module.sass'
 
-export const sortList = [
-  { name: 'популярности (DESK)', sortProperty: 'rating' },
-  { name: 'популярности (ASC)', sortProperty: '-rating' },
-  { name: 'цене (DESK)', sortProperty: 'price' },
-  { name: 'цене (ASC)', sortProperty: '-price' },
-  { name: 'алфавиту (DESK)', sortProperty: 'name' },
-  { name: 'алфавиту (ASC)', sortProperty: '-name' },
+export const sortList: ISortInfo[] = [
+  { name: 'популярности (DESK)', sortBy: SortPropertyEnum.RATING_DESC },
+  { name: 'популярности (ASC)', sortBy: SortPropertyEnum.RATING_ASC },
+  { name: 'цене (DESK)', sortBy: SortPropertyEnum.PRICE_DESC },
+  { name: 'цене (ASC)', sortBy: SortPropertyEnum.PRICE_ASC },
+  { name: 'алфавиту (DESK)', sortBy: SortPropertyEnum.NAME_DESC },
+  { name: 'алфавиту (ASC)', sortBy: SortPropertyEnum.NAME_ASC },
 ]
 
-const Sort = ({ onChangeSort }) => {
-  const sort = useSelector(state => state.filter.sort)
-  const sortRef = React.useRef()
+const Sort: React.FC<any> = ({ onChangeSort }) => {
+  const { sort } = useSelector((state: any) => state.filter)
+  const sortRef = React.useRef<HTMLDivElement>(null)
 
   const [isOpen, setIsOpen] = React.useState(false)
   const [order, setOrder] = React.useState(false)
 
-  const clickOnSortHandler = obj => {
+  const clickOnSortHandler = (obj: ISortInfo) => {
     onChangeSort(obj)
     setIsOpen(false)
   }
 
+  type OpenPopUp = MouseEvent & { path: Node[] }
+
   React.useEffect(() => {
-    const handleClickOutside = event => {
-      if (!event.path.includes(sortRef.current)) setIsOpen(false)
+    const handleClickOutside = (event: MouseEvent) => {
+      const _event = event as OpenPopUp
+      if (sortRef.current && !_event.path.includes(sortRef.current)) setIsOpen(false)
     }
     document.body.addEventListener('click', handleClickOutside)
 
@@ -62,7 +65,7 @@ const Sort = ({ onChangeSort }) => {
             {sortList.map((obj, index) => (
               <li
                 key={index}
-                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}
+                className={sort.sortBy === obj.sortBy ? 'active' : ''}
                 onClick={() => clickOnSortHandler(obj)}
               >
                 {obj.name}

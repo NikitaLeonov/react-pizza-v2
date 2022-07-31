@@ -1,32 +1,41 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, cartItemByIdSelector } from '../../redux/slices/cartSlice'
+import { addItem, CartItem, cartItemByIdSelector } from '../../redux/slices/cartSlice'
 
 import styles from './PizzaBlock.module.sass'
 
-const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
-  const dispatch = useDispatch()
-  const typeNames = ['тонкое', 'традиционное']
+type PizzaBlockProps = {
+  id: string
+  name: string
+  price: number
+  imageUrl: string
+  types: number[]
+  sizes: number[]
+}
 
-  const [activeSize, setActiveSize] = React.useState(0)
-  const [activeType, setActiveType] = React.useState(0)
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ name, price, imageUrl, sizes, types, id }) => {
+  const dispatch = useDispatch()
+  const typeNames: string[] = ['тонкое', 'традиционное']
+
+  const [activeSize, setActiveSize] = React.useState<number>(0)
+  const [activeType, setActiveType] = React.useState<number>(0)
 
   const cartItem = useSelector(cartItemByIdSelector(id))
-  const addedCount = cartItem ? cartItem.count : 0
+  const addedCount: number = cartItem ? cartItem.count : 0
 
-  const onClickAdd = () => {
-    const item = {
+  const onClickAdd = (): void => {
+    const item: CartItem = {
       id,
       name,
       price,
       imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      count: 0,
     }
 
-    dispatch(addItem({ item }))
+    dispatch(addItem(item))
   }
 
   return (
@@ -66,7 +75,13 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
           <div className={styles.bottom}>
             <span className={styles.price}>от {price} ₽</span>
             <button onClick={() => onClickAdd()} className='button button--outline button--add'>
-              <svg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <svg
+                width='12'
+                height='12'
+                viewBox='0 0 12 12'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
                 <path
                   d='M10.8 4.8H7.2V1.2C7.2 0.5373 6.6627 0 6 0C5.3373 0 4.8 0.5373 4.8 1.2V4.8H1.2C0.5373 4.8 0 5.3373 0 6C0 6.6627 0.5373 7.2 1.2 7.2H4.8V10.8C4.8 11.4627 5.3373 12 6 12C6.6627 12 7.2 11.4627 7.2 10.8V7.2H10.8C11.4627 7.2 12 6.6627 12 6C12 5.3373 11.4627 4.8 10.8 4.8Z'
                   fill='white'
