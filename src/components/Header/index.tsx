@@ -1,30 +1,38 @@
+import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { cartSelector } from '../../redux/cart/selectors'
 
 import Search from '../Search'
 
-import styles from './Header.module.sass'
 import logoSvg from '../../assets/img/pizza-logo.svg'
-import { cartSelector } from '../../redux/slices/cartSlice'
+import styles from './Header.module.sass'
 
 const Header = () => {
   const { items, totalPrice } = useSelector(cartSelector)
-
   const { pathname } = useLocation()
+  const isMounted = React.useRef(false)
+
+  React.useEffect(() => {
+    if (isMounted.current) localStorage.setItem('cart', JSON.stringify(items))
+    isMounted.current = true
+  }, [items])
 
   return (
-    <div className={styles.header}>
+    <div className={`${styles.header} ${pathname === '/cart' && styles.mainHeader}`}>
       <div className={styles.container}>
         <Link to='/'>
           <div className={styles.logo}>
-            <img width='38' src={logoSvg} alt='Pizza logo' />
+            <img width='38' src={logoSvg} alt='pizza logo' />
             <div>
               <h1>React Pizza v2</h1>
               <p>самая вкусная пицца во&nbsp;вселенной</p>
             </div>
           </div>
         </Link>
+
         {pathname !== '/cart' && <Search />}
+
         <Link to='/cart'>
           <div className='header__cart'>
             {pathname !== '/cart' && (

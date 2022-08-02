@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { addItem, CartItem, cartItemByIdSelector } from '../../redux/slices/cartSlice'
+import { useSelector } from 'react-redux'
+import { useAppDispatch as useDispatch } from '../../redux/store'
+import { addItem } from '../../redux/cart/slice'
+import { cartItemByIdSelector } from '../../redux/cart/selectors'
+import { CartItem } from '../../redux/cart/types'
 
 import styles from './PizzaBlock.module.sass'
 
@@ -50,22 +53,22 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ name, price, imageUrl, sizes, t
         <div>
           <div className={styles.selector}>
             <ul>
-              {types.map((type, index) => (
+              {types.map((type, idx) => (
                 <li
-                  key={index}
-                  className={activeType === index ? styles.active : ''}
-                  onClick={() => setActiveType(index)}
+                  key={idx}
+                  className={activeType === idx ? styles.active : ''}
+                  onClick={() => setActiveType(idx)}
                 >
                   {typeNames[type]}
                 </li>
               ))}
             </ul>
             <ul>
-              {sizes.map((size, index) => (
+              {sizes.map((size, idx) => (
                 <li
-                  key={index}
-                  className={activeSize === index ? styles.active : ''}
-                  onClick={() => setActiveSize(index)}
+                  key={idx}
+                  className={activeSize === idx ? styles.active : ''}
+                  onClick={() => setActiveSize(idx)}
                 >
                   {size} см.
                 </li>

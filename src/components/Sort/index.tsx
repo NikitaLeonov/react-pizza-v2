@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { ISortInfo, SortPropertyEnum } from '../../redux/slices/filterSlice'
+import { ISortInfo, SortPropertyEnum } from '../../redux/filter/types'
+import { RootState } from '../../redux/store'
 
 import styles from './Sort.module.sass'
 
@@ -13,12 +14,15 @@ export const sortList: ISortInfo[] = [
   { name: 'алфавиту (ASC)', sortBy: SortPropertyEnum.NAME_ASC },
 ]
 
-const Sort: React.FC<any> = ({ onChangeSort }) => {
-  const { sort } = useSelector((state: any) => state.filter)
-  const sortRef = React.useRef<HTMLDivElement>(null)
+interface ISortProps {
+  onChangeSort: (obj: ISortInfo) => void
+}
 
+const Sort: React.FC<ISortProps> = ({ onChangeSort }) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [order, setOrder] = React.useState(false)
+  const sortRef = React.useRef<HTMLDivElement>(null)
+  const { sort } = useSelector((state: RootState) => state.filter)
 
   const clickOnSortHandler = (obj: ISortInfo) => {
     onChangeSort(obj)
@@ -62,9 +66,9 @@ const Sort: React.FC<any> = ({ onChangeSort }) => {
       {isOpen && (
         <div className={styles.popup}>
           <ul>
-            {sortList.map((obj, index) => (
+            {sortList.map((obj, idx) => (
               <li
-                key={index}
+                key={idx}
                 className={sort.sortBy === obj.sortBy ? 'active' : ''}
                 onClick={() => clickOnSortHandler(obj)}
               >

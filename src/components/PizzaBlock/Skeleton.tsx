@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader'
 
-const Skeleton = props => (
+const Skeleton = () => (
   <div style={{ display: 'flex', justifyContent: 'center' }}>
     <ContentLoader
       speed={2}
@@ -9,7 +9,6 @@ const Skeleton = props => (
       viewBox='0 0 280 513'
       backgroundColor='#f2f2f2'
       foregroundColor='#f5f5f5'
-      {...props}
     >
       <rect x='10' y='10' rx='100%' ry='100%' width='248' height='248' />
       <rect x='16' y='274' rx='6' ry='6' width='248' height='34' />

@@ -1,5 +1,7 @@
-import { useDispatch } from 'react-redux'
-import { addItem, removeItem, removeItemCategory } from '../redux/slices/cartSlice'
+import { useAppDispatch as useDispatch } from '../../redux/store'
+import { addItem, removeItem, removeItemCategory } from '../../redux/cart/slice'
+
+import styles from './CartItem.module.sass'
 
 type CartItemProps = {
   item: {
@@ -16,28 +18,26 @@ type CartItemProps = {
 const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const dispatch = useDispatch()
 
-  const isRemoveAll = () => {
-    dispatch(item.count !== 1 ? removeItem(item) : removeItemCategory(item))
-  }
-
   return (
-    <div className='cart__item'>
-      <div className='cart__item-img'>
-        <img
-          className='pizza-block__image'
-          src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-          alt='Pizza'
-        />
-      </div>
-      <div className='cart__item-info'>
+    <div className={styles.item}>
+      <img
+        className='pizza-block__image'
+        src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
+        alt='Pizza'
+      />
+
+      <div className={styles.info}>
         <h3>{item.name}</h3>
         <p>{`${item.type}, ${item.size} см.`}</p>
       </div>
-      <div className='cart__item-count'>
-        <div
-          onClick={() => isRemoveAll()}
-          className='button button--outline button--circle cart__item-count-minus'
+
+      <div className={styles.count}>
+        <button
+          disabled={item.count === 1}
+          onClick={() => dispatch(removeItem(item))}
+          className={`button button--outline button--circle ${styles.minus}`}
         >
+          {/* item.count === 1 ? styles.__disable */}
           <svg
             width='10'
             height='10'
@@ -54,11 +54,13 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
               fill='#EB5A1E'
             ></path>
           </svg>
-        </div>
+        </button>
+
         <b>{item.count}</b>
-        <div
+
+        <button
           onClick={() => dispatch(addItem(item))}
-          className='button button--outline button--circle cart__item-count-plus'
+          className={'button button--outline button--circle'}
         >
           <svg
             width='10'
@@ -76,13 +78,13 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
               fill='#EB5A1E'
             ></path>
           </svg>
-        </div>
+        </button>
       </div>
-      <div className='cart__item-price'>
-        <b>{item.price * item.count} ₽</b>
-      </div>
-      <div className='cart__item-remove'>
-        <div
+
+      <b className={styles.price}>{item.price * item.count} ₽</b>
+
+      <div className={styles.remove}>
+        <button
           onClick={() => dispatch(removeItemCategory(item))}
           className='button button--outline button--circle'
         >
@@ -102,7 +104,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
               fill='#EB5A1E'
             ></path>
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   )

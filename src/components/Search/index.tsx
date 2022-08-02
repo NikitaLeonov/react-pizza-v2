@@ -1,7 +1,7 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { setSearchValue } from '../../redux/slices/filterSlice'
-import debounce from '../../hooks/debounce'
+import { useAppDispatch as useDispatch } from '../../redux/store'
+import { setSearchValue } from '../../redux/filter/slice'
+import useDebounce from '../../hooks/useDebounce'
 
 import styles from './Search.module.sass'
 
@@ -17,7 +17,7 @@ const Search = () => {
   }
 
   const updateSearchValue = React.useCallback<(str: string) => void>(
-    debounce((str: string) => dispatch(setSearchValue(str)), 250),
+    useDebounce((str: string) => dispatch(setSearchValue(str)), 250),
     []
   )
 

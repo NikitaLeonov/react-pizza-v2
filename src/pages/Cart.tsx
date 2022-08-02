@@ -1,19 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { clearItems, cartSelector } from '../redux/slices/cartSlice'
+import { useSelector } from 'react-redux'
+import { useAppDispatch as useDispatch } from '../redux/store'
+import { clearItems } from '../redux/cart/slice'
+import { cartSelector } from '../redux/cart/selectors'
+// import { CartItem as CartItemType } from '../redux/cart/types'
 
 import CartItem from '../components/CartItem'
 import CartEmpty from '../components/CartEmpty'
-
-type CartProps = {
-  id: string
-  name: string
-  price: number
-  imageUrl: string
-  types: number[]
-  sizes: number[]
-}
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch()
@@ -97,7 +91,7 @@ const Cart: React.FC = () => {
             </div>
           </div>
           <div className='content__cart-items'>
-            {items.map((item: CartProps) => (
+            {items.map(item => (
               <CartItem key={item.id} item={item} />
             ))}
           </div>
@@ -105,17 +99,14 @@ const Cart: React.FC = () => {
             <div className='cart__bottom-details'>
               <span>
                 <span>Всего пицц: </span>
-                <b>{items.reduce((acc: number, item: CartProps) => (acc += item.count), 0)} шт.</b>
+                <b>
+                  {items.reduce((acc, item) => (acc += item.count), 0)}
+                  шт.
+                </b>
               </span>
               <span>
                 Сумма заказа:
-                <b>
-                  {items.reduce(
-                    (acc: number, item: CartProps) => (acc += item.price * item.count),
-                    0
-                  )}
-                  ₽
-                </b>
+                <b>{items.reduce((acc, item) => (acc += item.price * item.count), 0)}₽</b>
               </span>
             </div>
             <div className='cart__bottom-buttons'>

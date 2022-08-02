@@ -12,6 +12,17 @@
   border: 1px solid transparent
   @include noselect()
 
+  &:disabled
+    border-color: darken($color: $gray-line, $amount: 10)
+    &:active
+      transform: none 
+    path
+      fill: darken($color: $gray-line, $amount: 15)
+    &:hover
+      background-color: #fff        
+      path
+        fill: darken($color: $gray-line, $amount: 15)
+
   &,
   span 
     color: #fff
@@ -21,7 +32,6 @@
   path,
   svg 
     transition: all $duration ease-in-out
-  
 
   &:hover 
     background-color: darken($orange, 8%)

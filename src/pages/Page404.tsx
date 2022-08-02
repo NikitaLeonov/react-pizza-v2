@@ -1,6 +1,6 @@
 import Page404Block from '../components/Page404Block'
 
-const Page404 = props => {
+const Page404 = () => {
   return <Page404Block />
 }
 

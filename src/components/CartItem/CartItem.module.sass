@@ -1,0 +1,66 @@
+@import '../../sass/_variables'
+// @import '../../sass/components/_button'
+    
+.item 
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    height: 80px
+    margin-top: 30px        
+    padding-top: 30px
+    border-top: 1px solid $gray-line        
+    &:first-of-type
+        border-top: none
+    img        
+        width: 80px      
+        margin-right: 15px                
+    .info     
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: flex-start
+      width: 30%        
+      h3 
+        font-size: 22px
+        font-weight: bold
+        line-height: 27px
+      p 
+        font-size: 18px
+        color: #8d8d8d
+    .count 
+      display: flex
+      align-items: center
+      justify-content: space-between
+      .minus 
+        svg 
+            path:first-of-type 
+                display: none                  
+      b 
+        font-size: 22px
+        padding: 0 16px
+    .price 
+        font-size: 22px
+        font-weight: bold
+      
+    .remove 
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        button 
+            border-color: darken($color: $gray-line, $amount: 10)        
+            &:hover, &:active 
+                background-color: darken($color: $gray-line, $amount: 80)
+                border-color: darken($color: $gray-line, $amount: 80)
+            path
+                &:hover, &:active 
+                fill: #fff
+        svg 
+            position: relative
+            width: 12px
+            height: 12px
+            transform: rotate(45deg)        
+            path 
+                fill: darken($color: $gray-line, $amount: 15)            
+            
+

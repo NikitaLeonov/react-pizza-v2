@@ -1,15 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from '../../redux/store'
-import {
-  setCategoryId,
-  setSortType,
-  setPage,
-  setFilters,
-  ISortInfo,
-} from '../../redux/slices/filterSlice'
-import { fetchPizzas, SearchPizzaParams } from '../../redux/slices/pizzaSlice'
+import { RootState, useAppDispatch as useDispatch } from '../../redux/store'
+import { setCategoryId, setSortType, setPage, setFilters } from '../../redux/filter/slice'
+import { ISortInfo } from '../../redux/filter/types'
+import { fetchPizzas } from '../../redux/pizza/asyncAction'
+import { SearchPizzaParams, IPizza } from '../../redux/pizza/types'
 import qs from 'qs'
 
 import Categories from '../../components/Categories'
@@ -23,11 +19,11 @@ import styles from './Home.module.sass'
 
 const Home = () => {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
   const isMounted = React.useRef<boolean>(false)
 
-  const { categoryId, sort, page, searchValue } = useSelector((state: any) => state.filter)
-  const { items, status } = useSelector((state: any) => state.pizza)
+  const { categoryId, sort, page, searchValue } = useSelector((state: RootState) => state.filter)
+  const { items, status } = useSelector((state: RootState) => state.pizza)
 
   const getPizzas = async (): Promise<void> => {
     const order: string = sort.sortBy.includes('-') ? 'asc' : 'desc'
@@ -77,17 +73,16 @@ const Home = () => {
     getPizzas()
   }, [categoryId, sort, searchValue, page]) // eslint-disable-line
 
-  const pizzas = items.map((item: any) => <PizzaBlock key={item.id} {...item} />)
-  const skeletons = [...Array(4)].map((_, index) => <Skeleton key={index} />)
+  const pizzas = items.map((item: IPizza) => <PizzaBlock key={item.id} {...item} />)
+  const skeletons = [...Array(4)].map((_, idx) => <Skeleton key={idx} />)
+
+  const onChangeCategory = React.useCallback((idx: number) => dispatch(setCategoryId(idx)), [])
 
   return (
     <>
       <div className={styles.top}>
-        <Categories
-          categoryId={categoryId}
-          onChangeCategory={(idx: number) => dispatch(setCategoryId(idx))}
-        />
-        <Sort onChangeSort={(obj: any) => dispatch(setSortType(obj))} />
+        <Categories categoryId={categoryId} onChangeCategory={onChangeCategory} />
+        <Sort onChangeSort={(obj: ISortInfo) => dispatch(setSortType(obj))} />
       </div>
       <h2 className={styles.title}>Все пиццы</h2>
       <div className={styles.items}>
